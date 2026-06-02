@@ -47,6 +47,10 @@ outputs[0]["text"]
 
 See `bench.py` for benchmark.
 
+## Scheduler Notes
+
+See `docs/chunked_prefill_interleaving.md` for the chunked prefill and decode interleaving design.
+
 **Test Configuration:**
 - Hardware: RTX 4070 Laptop (8GB)
 - Model: Qwen3-0.6B

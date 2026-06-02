@@ -10,6 +10,8 @@ class Scheduler:
     def __init__(self, config: Config):
         self.max_num_seqs = config.max_num_seqs
         self.max_num_batched_tokens = config.max_num_batched_tokens
+        self.prefill_decode_interleave = config.prefill_decode_interleave
+        self.last_schedule_was_prefill = False
         self.eos = config.eos
         self.block_size = config.kvcache_block_size
         self.block_manager = BlockManager(config.num_kvcache_blocks, config.kvcache_block_size)
@@ -23,10 +25,34 @@ class Scheduler:
         self.waiting.append(seq)
 
     def schedule(self) -> tuple[list[Sequence], bool]:
+        if self._should_schedule_decode_first():
+            scheduled_seqs = self.schedule_decode()
+            if scheduled_seqs:
+                self.last_schedule_was_prefill = False
+                return scheduled_seqs, False
+
+        scheduled_seqs = self.schedule_prefill()
+        if scheduled_seqs:
+            self.last_schedule_was_prefill = True
+            return scheduled_seqs, True
+
+        scheduled_seqs = self.schedule_decode()
+        assert scheduled_seqs
+        self.last_schedule_was_prefill = False
+        return scheduled_seqs, False
+
+    def _should_schedule_decode_first(self):
+        return (
+            self.prefill_decode_interleave
+            and self.last_schedule_was_prefill
+            and self.waiting
+            and self.running
+        )
+
+    def schedule_prefill(self) -> list[Sequence]:
         scheduled_seqs = []
         num_batched_tokens = 0
 
-        # prefill
         while self.waiting and len(scheduled_seqs) < self.max_num_seqs:
             seq = self.waiting[0]
             remaining = self.max_num_batched_tokens - num_batched_tokens
@@ -51,10 +77,10 @@ class Scheduler:
                 self.running.append(seq)
             scheduled_seqs.append(seq)
 
-        if scheduled_seqs:
-            return scheduled_seqs, True
+        return scheduled_seqs
 
-        # decode
+    def schedule_decode(self) -> list[Sequence]:
+        scheduled_seqs = []
         while self.running and len(scheduled_seqs) < self.max_num_seqs:
             seq = self.running.popleft()
             while not self.block_manager.can_append(seq):
@@ -68,13 +94,13 @@ class Scheduler:
                 seq.is_prefill = False
                 self.block_manager.may_append(seq)
                 scheduled_seqs.append(seq)
-        assert scheduled_seqs
         self.running.extendleft(reversed(scheduled_seqs))
-        return scheduled_seqs, False
+        return scheduled_seqs
 
     def preempt(self, seq: Sequence):
         seq.status = SequenceStatus.WAITING
         seq.is_prefill = True
+        self.last_schedule_was_prefill = False
         self.block_manager.deallocate(seq)
         self.waiting.appendleft(seq)
 
