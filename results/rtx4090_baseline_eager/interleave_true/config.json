@@ -1,0 +1,22 @@
+{
+  "model": "/workspace/huggingface/Qwen3-0.6B",
+  "mode": "both",
+  "out_dir": "results/rtx4090_baseline_eager",
+  "enforce_eager": true,
+  "tensor_parallel_size": 1,
+  "max_model_len": 2048,
+  "max_num_batched_tokens": 128,
+  "max_num_seqs": 8,
+  "gpu_memory_utilization": 0.9,
+  "quantization": null,
+  "temperature": 0.6,
+  "initial_short_requests": 4,
+  "late_short_requests": 4,
+  "long_requests": 1,
+  "short_prompt_tokens": 16,
+  "long_prompt_tokens": 1024,
+  "short_output_tokens": 64,
+  "long_output_tokens": 16,
+  "warmup_steps": 2,
+  "max_steps": 10000
+}
