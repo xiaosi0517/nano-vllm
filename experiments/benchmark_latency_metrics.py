@@ -188,10 +188,13 @@ def run_engine_step(llm: LLM, records: dict[int, RequestRecord], step_index: int
 
 def build_summary(
     interleave: bool,
+    quantization: str | None,
     step_rows: list[dict],
     records: dict[int, RequestRecord],
     total_time_s: float,
     preemption_count: int,
+    model_parameter_bytes: int,
+    model_buffer_bytes: int,
     peak_cuda_allocated_bytes: int | None,
     peak_cuda_reserved_bytes: int | None,
 ) -> dict:
@@ -242,6 +245,7 @@ def build_summary(
 
     summary = {
         "interleave": interleave,
+        "quantization": quantization,
         "num_requests": len(records),
         "completed_requests": sum(1 for record in records.values() if record.finish_time_s is not None),
         "total_time_s": total_time_s,
@@ -255,6 +259,9 @@ def build_summary(
         "decode_tokens_per_s": total_decode_tokens / decode_time_s if decode_time_s > 0 else None,
         "total_output_tokens_per_s": total_output_tokens / total_time_s if total_time_s > 0 else None,
         "num_preemptions": preemption_count,
+        "model_parameter_bytes": model_parameter_bytes,
+        "model_buffer_bytes": model_buffer_bytes,
+        "model_storage_bytes": model_parameter_bytes + model_buffer_bytes,
         "peak_kv_cache_used_blocks": peak_used_kv_blocks,
         "peak_kv_cache_total_blocks": peak_total_kv_blocks,
         "peak_kv_cache_usage_ratio": (
@@ -274,7 +281,8 @@ def run_once(args, interleave: bool, out_dir: str) -> dict:
     run_dir = os.path.join(out_dir, f"interleave_{tag}")
     os.makedirs(run_dir, exist_ok=True)
 
-    print(f"\n========== Running prefill_decode_interleave={interleave} ==========\n")
+    quant_label = args.quantization or "none"
+    print(f"\n========== Running prefill_decode_interleave={interleave}, quantization={quant_label} ==========\n")
     llm = LLM(
         os.path.expanduser(args.model),
         enforce_eager=args.enforce_eager,
@@ -284,11 +292,14 @@ def run_once(args, interleave: bool, out_dir: str) -> dict:
         max_num_seqs=args.max_num_seqs,
         gpu_memory_utilization=args.gpu_memory_utilization,
         prefill_decode_interleave=interleave,
+        quantization=args.quantization,
     )
 
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
         torch.cuda.reset_peak_memory_stats()
+    model_parameter_bytes = sum(p.numel() * p.element_size() for p in llm.model_runner.model.parameters())
+    model_buffer_bytes = sum(b.numel() * b.element_size() for b in llm.model_runner.model.buffers())
 
     records: dict[int, RequestRecord] = {}
     preemption_counter = patch_preemption_counter(llm, records)
@@ -357,10 +368,13 @@ def run_once(args, interleave: bool, out_dir: str) -> dict:
 
         summary, request_rows = build_summary(
             interleave=interleave,
+            quantization=args.quantization,
             step_rows=step_rows,
             records=records,
             total_time_s=total_time_s,
             preemption_count=preemption_counter["count"],
+            model_parameter_bytes=model_parameter_bytes,
+            model_buffer_bytes=model_buffer_bytes,
             peak_cuda_allocated_bytes=peak_allocated,
             peak_cuda_reserved_bytes=peak_reserved,
         )
@@ -393,6 +407,7 @@ def main():
     parser.add_argument("--max-num-batched-tokens", type=int, default=128)
     parser.add_argument("--max-num-seqs", type=int, default=8)
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.9)
+    parser.add_argument("--quantization", choices=["none", "w8a16"], default="none")
     parser.add_argument("--temperature", type=float, default=0.6)
     parser.add_argument("--initial-short-requests", type=int, default=4)
     parser.add_argument("--late-short-requests", type=int, default=4)
@@ -404,6 +419,8 @@ def main():
     parser.add_argument("--warmup-steps", type=int, default=2)
     parser.add_argument("--max-steps", type=int, default=10000)
     args = parser.parse_args()
+    if args.quantization == "none":
+        args.quantization = None
 
     if args.out_dir is None:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
