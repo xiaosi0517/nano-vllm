@@ -1,0 +1,97 @@
+step,kind,scheduled_seq_ids,scheduled_labels,num_scheduled_seqs,prefill_tokens,decode_tokens,new_output_tokens,finished_seq_ids,step_latency_s,elapsed_s,waiting,running,used_kv_blocks,free_kv_blocks,phase
+0,prefill,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,64,0,4,,23.595414873212576,23.598986349999905,0,4,4,669,warmup
+1,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.030313540250062943,23.629378382116556,0,4,4,669,warmup
+2,prefill,15,long_0,1,128,0,0,,0.03083917498588562,23.663620617240667,5,4,8,665,main
+3,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.02791796252131462,23.691596493124962,5,4,8,665,main
+4,prefill,15,long_0,1,128,0,0,,0.029814161360263824,23.721487775444984,5,4,8,665,main
+5,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.027607131749391556,23.74913966283202,5,4,8,665,main
+6,prefill,15,long_0,1,128,0,0,,0.02965286374092102,23.778832975775003,5,4,8,665,main
+7,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.027906514704227448,23.80679164081812,5,4,8,665,main
+8,prefill,15,long_0,1,128,0,0,,0.029647376388311386,23.836512450128794,5,4,8,665,main
+9,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.027900751680135727,23.864459991455078,5,4,8,665,main
+10,prefill,15,long_0,1,128,0,0,,0.03008882701396942,23.894597474485636,5,4,8,665,main
+11,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.027876634150743484,23.92252665758133,5,4,8,665,main
+12,prefill,15,long_0,1,128,0,0,,0.029888223856687546,23.95249180495739,5,4,8,665,main
+13,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.027766861021518707,23.980303466320038,5,4,8,665,main
+14,prefill,15,long_0,1,128,0,0,,0.030086800456047058,24.01043452695012,5,4,8,665,main
+15,decode,11 12 13 14,initial_short_0 initial_short_1 initial_short_2 initial_short_3,4,0,4,4,,0.02796667441725731,24.03845963999629,5,4,8,665,main
+16,prefill,15,long_0,1,128,0,1,,0.029748819768428802,24.068302161991596,4,5,8,665,main
+17,decode,11 12 13 14 15,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0,5,0,5,5,,0.027889985591173172,24.096256148070097,4,5,9,664,main
+18,prefill,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,64,0,4,,0.029648546129465103,24.125979777425528,0,9,13,660,main
+19,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.0276024267077446,24.15364008024335,0,9,13,660,main
+20,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.030863098800182343,24.18457394838333,0,9,13,660,main
+21,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.03004111722111702,24.214718122035265,0,9,13,660,main
+22,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.02743959054350853,24.242229089140892,0,9,13,660,main
+23,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.027324706315994263,24.26961514353752,0,9,13,660,main
+24,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.02722252905368805,24.296894054859877,0,9,13,660,main
+25,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.02726675197482109,24.32421612367034,0,9,13,660,main
+26,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.02763906493782997,24.351912919431925,0,9,13,660,main
+27,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.027796655893325806,24.379781913012266,0,9,13,660,main
+28,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.027804788202047348,24.407652013003826,0,9,13,660,main
+29,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.02762525901198387,24.435342449694872,0,9,13,660,main
+30,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.0275745689868927,24.462982021272182,0,9,13,660,main
+31,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,,0.027401696890592575,24.490446496754885,0,9,13,660,main
+32,decode,11 12 13 14 15 16 17 18,initial_short_0 initial_short_1 initial_short_2 initial_short_3 long_0 late_short_0 late_short_1 late_short_2,8,0,8,8,15,0.027555175125598907,24.51806988939643,0,8,8,665,main
+33,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027560293674468994,24.5456886254251,0,8,8,665,main
+34,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027900446206331253,24.573650415986776,0,8,8,665,main
+35,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027875684201717377,24.601591732352972,0,8,8,665,main
+36,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027964308857917786,24.629621617496014,0,8,8,665,main
+37,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027937911450862885,24.657633766531944,0,8,8,665,main
+38,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027707986533641815,24.685405753552914,0,8,8,665,main
+39,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027390990406274796,24.712859980762005,0,8,8,665,main
+40,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027659643441438675,24.740576837211847,0,8,8,665,main
+41,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02797694131731987,24.76861671358347,0,8,8,665,main
+42,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.028033677488565445,24.796721305698156,0,8,8,665,main
+43,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.028107792139053345,24.824894834309816,0,8,8,665,main
+44,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02756275236606598,24.852525498718023,0,8,8,665,main
+45,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02745557576417923,24.880042895674706,0,8,8,665,main
+46,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027928221970796585,24.90803126245737,0,8,8,665,main
+47,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027903929352760315,24.936005257070065,0,8,8,665,main
+48,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027952250093221664,24.96402406692505,0,8,8,665,main
+49,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02800869569182396,24.9920987598598,0,8,8,665,main
+50,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.028091829270124435,25.020257264375687,0,8,8,665,main
+51,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02806197851896286,25.04839088395238,0,8,8,665,main
+52,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.028016284108161926,25.076474014669657,0,8,8,665,main
+53,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027498405426740646,25.104032203555107,0,8,8,665,main
+54,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027472231537103653,25.131566774100065,0,8,8,665,main
+55,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027929596602916718,25.15955786779523,0,8,8,665,main
+56,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02792755514383316,25.187551833689213,0,8,8,665,main
+57,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.0280950665473938,25.215719785541296,0,8,8,665,main
+58,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027889493852853775,25.243677530437708,0,8,8,665,main
+59,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027891140431165695,25.271638616919518,0,8,8,665,main
+60,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.028026796877384186,25.299732264131308,0,8,8,665,main
+61,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027789149433374405,25.327590126544237,0,8,8,665,main
+62,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027618255466222763,25.35527789965272,0,8,8,665,main
+63,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02794790267944336,25.38328790664673,0,8,8,665,main
+64,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.028170064091682434,25.411525692790747,0,8,8,665,main
+65,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.02806420996785164,25.43965958058834,0,8,8,665,main
+66,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027629509568214417,25.467361118644476,0,8,8,665,main
+67,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027361277490854263,25.4947849214077,0,8,8,665,main
+68,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027692418545484543,25.52253796160221,0,8,8,665,main
+69,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027940474450588226,25.550547264516354,0,8,8,665,main
+70,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027894534170627594,25.578511770814657,0,8,8,665,main
+71,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,,0.027899272739887238,25.606485325843096,0,8,8,665,main
+72,decode,11 12 13 14 16 17 18 19,initial_short_0 initial_short_1 initial_short_2 initial_short_3 late_short_0 late_short_1 late_short_2 late_short_3,8,0,8,8,11 12 13 14,0.028045807033777237,25.634614184498787,0,4,4,669,main
+73,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.02766493335366249,25.66234189271927,0,4,4,669,main
+74,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.02737058699131012,25.689758956432343,0,4,4,669,main
+75,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.027078643441200256,25.716882552951574,0,4,4,669,main
+76,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.027194909751415253,25.744122579693794,0,4,4,669,main
+77,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.027214735746383667,25.771389972418547,0,4,4,669,main
+78,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.02744866907596588,25.798887189477682,0,4,4,669,main
+79,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.027670957148075104,25.82661072537303,0,4,4,669,main
+80,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,,0.027618587017059326,25.854283683001995,0,4,4,669,main
+81,decode,16 17 18 19,late_short_0 late_short_1 late_short_2 late_short_3,4,0,4,4,16 17 18,0.02734336256980896,25.881682764738798,0,1,1,672,main
+82,decode,19,late_short_3,1,0,1,1,,16.337021943181753,42.21875296160579,0,1,1,672,main
+83,decode,19,late_short_3,1,0,1,1,,0.029212575405836105,42.24802607297897,0,1,1,672,main
+84,decode,19,late_short_3,1,0,1,1,,0.02732129395008087,42.275393303483725,0,1,1,672,main
+85,decode,19,late_short_3,1,0,1,1,,0.02711385488510132,42.30254612863064,0,1,1,672,main
+86,decode,19,late_short_3,1,0,1,1,,0.027175117284059525,42.32975744828582,0,1,1,672,main
+87,decode,19,late_short_3,1,0,1,1,,0.02709377184510231,42.35688881203532,0,1,1,672,main
+88,decode,19,late_short_3,1,0,1,1,,0.027137134224176407,42.38406280055642,0,1,1,672,main
+89,decode,19,late_short_3,1,0,1,1,,0.027350585907697678,42.41145097464323,0,1,1,672,main
+90,decode,19,late_short_3,1,0,1,1,,0.027043763548135757,42.43853272870183,0,1,1,672,main
+91,decode,19,late_short_3,1,0,1,1,,0.026994280517101288,42.46556442975998,0,1,1,672,main
+92,decode,19,late_short_3,1,0,1,1,,0.026963230222463608,42.492565739899874,0,1,1,672,main
+93,decode,19,late_short_3,1,0,1,1,,0.02689477801322937,42.519497998058796,0,1,1,672,main
+94,decode,19,late_short_3,1,0,1,1,,0.02693893015384674,42.54647481068969,0,1,1,672,main
+95,decode,19,late_short_3,1,0,1,1,19,0.026927277445793152,42.573454298079014,0,0,0,673,main
