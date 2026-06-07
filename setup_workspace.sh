@@ -10,12 +10,50 @@ MODEL_CACHE_DIR="${MODEL_CACHE_DIR:-$WORKSPACE/models}"
 MODEL_LINK="${MODEL_LINK:-/root/huggingface/Qwen3-0.6B}"
 PYTHON_BIN="${PYTHON_BIN:-python3.10}"
 
+run_as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  elif command -v sudo >/dev/null 2>&1; then
+    sudo "$@"
+  else
+    echo "error: root privileges are required to install system packages." >&2
+    exit 1
+  fi
+}
+
 echo "== Create workspace =="
 mkdir -p "$WORKSPACE"
 cd "$WORKSPACE"
 
+echo "== Check Python and venv support =="
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "error: $PYTHON_BIN is not installed or is not on PATH." >&2
+  exit 1
+fi
+
+if ! "$PYTHON_BIN" -c "import ensurepip" >/dev/null 2>&1; then
+  if command -v apt-get >/dev/null 2>&1; then
+    PYTHON_VERSION="$("$PYTHON_BIN" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+    echo "Installing python${PYTHON_VERSION}-venv..."
+    run_as_root apt-get update
+    run_as_root apt-get install -y "python${PYTHON_VERSION}-venv"
+  else
+    echo "error: ensurepip is unavailable and this system does not provide apt-get." >&2
+    echo "Install the venv package for $PYTHON_BIN, then rerun this script." >&2
+    exit 1
+  fi
+fi
+
 echo "== Create Python 3.10 venv =="
-"$PYTHON_BIN" -m venv "$VENV_DIR"
+if [ ! -x "$VENV_DIR/bin/python" ]; then
+  if [ -e "$VENV_DIR" ]; then
+    echo "Removing incomplete virtual environment at $VENV_DIR"
+    rm -rf "$VENV_DIR"
+  fi
+  "$PYTHON_BIN" -m venv "$VENV_DIR"
+else
+  echo "Reusing existing virtual environment at $VENV_DIR"
+fi
 # shellcheck disable=SC1091
 source "$VENV_DIR/bin/activate"
 
