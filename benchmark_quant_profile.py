@@ -422,6 +422,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model-path", default="~/huggingface/Qwen3-0.6B/")
     parser.add_argument("--output-dir", default="results")
+    parser.add_argument(
+        "--only",
+        choices=["all", "none_false", "none_true", "w8a16_false", "w8a16_true"],
+        default="all",
+        help="Run one configuration for cleaner Nsight profiles.",
+    )
     parser.add_argument("--max-model-len", type=int, default=2048)
     parser.add_argument("--max-num-batched-tokens", type=int, default=128)
     parser.add_argument("--max-num-seqs", type=int, default=8)
@@ -441,12 +447,17 @@ def main() -> None:
     run_dir = os.path.join(os.path.expanduser(args.output_dir), f"quant_profile_{timestamp}")
     os.makedirs(run_dir, exist_ok=True)
 
-    configurations = [
-        (None, False),
-        (None, True),
-        ("w8a16", False),
-        ("w8a16", True),
-    ]
+    all_configurations = {
+        "none_false": (None, False),
+        "none_true": (None, True),
+        "w8a16_false": ("w8a16", False),
+        "w8a16_true": ("w8a16", True),
+    }
+    configurations = (
+        list(all_configurations.values())
+        if args.only == "all"
+        else [all_configurations[args.only]]
+    )
     results = [run_config(args, quantization, interleave) for quantization, interleave in configurations]
     rows = [flatten_summary(result) for result in results]
 
